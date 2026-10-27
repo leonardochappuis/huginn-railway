@@ -14,6 +14,11 @@ ENV HUGINN_DATABASE_PASSWORD=${PGPASSWORD}
 ENV HUGINN_DATABASE_ADAPTER=postgresql
 ENV HUGINN_DATABASE_HOST=${PGHOST}
 ENV HUGINN_DATABASE_PORT=${PGPORT}
+# The image's setup_env decides whether to launch its bundled MySQL from the
+# UNPREFIXED vars before it merges the HUGINN_* ones; without these two it
+# sets START_MYSQL=true and aborts ("postgresql is not supported internally").
+ENV DATABASE_ADAPTER=postgresql
+ENV START_MYSQL=false
 ENV DATABASE_URL=${DATABASE_URL}
 ENV APP_SECRET_TOKEN=${APP_SECRET_TOKEN}
 EXPOSE 3000
